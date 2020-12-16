@@ -1,4 +1,4 @@
-const { Post } = require('../sequelize.js');
+const { Post } = require('../config/sequelize.js');
 const { validationResult } = require('express-validator');
 
 exports.getPost = (req, res) => {

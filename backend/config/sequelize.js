@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const PostModel = require('./models/Post');
+const PostModel = require('../models/Post');
 
 const DBURL = 'mysql://root@localhost:3306/alkemy-challenge'
 
