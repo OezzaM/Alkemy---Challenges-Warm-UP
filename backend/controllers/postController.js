@@ -1,19 +1,48 @@
+const { Post } = require('../sequelize.js');
+
 exports.getPost = (req, res) => {
-    res.send('Todos los posts')
+    Post.findAll()
+        .then(posts => {
+            res.send(posts)
+        })
 }
 
 exports.getPostId = (req, res) => {
-    res.send('Buscando post por id')
+    const id = req.params.id;
+    Post.findOne({ where: {id}})
+        .then(post => {
+            res.json(post)
+        })
     }
 
 exports.createPost = (req, res) => {
-    res.send('Creando un post');
+    const { title, content, image, category } = req.body
+    Post.create({
+        title,
+        content,
+        image,
+        category
+    }). then (post => {
+        res.send('POST CREATED')
+    })
 }
 
 exports.updatePost = (req, res) => {
-    res.send('Actualizando un post')
+    const id = req.params.id;
+    const update = req.body
+    Post.findOne({ where: { id }})
+        .then(post => {
+            post.update(update)
+                .then( postUpdated => {
+                    res.json(postUpdated)
+                })
+        })
 }
 
 exports.deletePost = (req, res) => {
-    res.send('Eliminando un post');
+    const id = req.params.id;
+
+    Post.destroy({
+        where: { id }
+    }).then( () => { res.send('Post deleted') })
 }
