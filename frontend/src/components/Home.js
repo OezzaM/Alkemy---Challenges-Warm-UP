@@ -4,12 +4,12 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   ProfileTwoTone,
-  VideoCameraOutlined,
-  UploadOutlined,
+  VideoCameraOutlined
 } from '@ant-design/icons';
 import './home.css'
 import List from './List';
 import Modals from './Modal';
+import Detail from './Detail';
 
 const Home = () => {
     const { Header, Sider, Content } = Layout;
@@ -31,10 +31,7 @@ const Home = () => {
               POSTS
             </Menu.Item>
             <Menu.Item key="2"  onClick={() => setMenu(2)} icon={<VideoCameraOutlined />}>
-              nav 2
-            </Menu.Item>
-            <Menu.Item key="3"  onClick={() => setMenu(3)} icon={<UploadOutlined />}>
-              nav 3
+              DETALLE
             </Menu.Item>
           </Menu>
         </Sider>
@@ -55,6 +52,7 @@ const Home = () => {
           >
             {menu === 1 && <List />}
             {menu === 1 && <Modals />}
+            {menu === 2 && <Detail />}
           </Content>
         </Layout>
       </Layout>

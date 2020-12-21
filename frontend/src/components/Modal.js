@@ -1,37 +1,34 @@
 import React,{ useEffect, useContext } from 'react';
 import PostContext from '../context/postContext';
 import 'antd/dist/antd.css';
-import { Modal, Form, Input, InputNumber, Select } from 'antd';
-import { v4 as uuidv4 } from 'uuid';
+import { Modal, Form, Input } from 'antd';
 
 const Modals = () => {
     
   // Obtener el state del formulario
   const postContext = useContext(PostContext);
-  const { formulario, mostrarFormulario, } = postContext;
+  const { formulario, showFormulario, _currentPost, createPost, updatePost } = postContext;
   
   
   const [form] = Form.useForm();
 
   const onCancel = () => {
     form.resetFields();
-    mostrarFormulario(!formulario);
+    showFormulario(!formulario);
     
   };
 
-  /* useEffect(() => {
-    if(operacionseleccionada){
-      const { concepto, monto, categoria, tipo } = operacionseleccionada
+  useEffect(() => {
+    if(_currentPost){
+      const { title, body } = _currentPost;
       form.setFieldsValue({
-        concepto,
-        monto,
-        categoria,
-        tipo
+        title,
+        content: body
       });
     }else{
       form.resetFields();
     }
-  }, [operacionseleccionada, form]) */
+  }, [_currentPost, form])
     
     // eslint-disable-next-line
     const validateMessages = {
@@ -61,14 +58,13 @@ const Modals = () => {
         .validateFields()
         .then((values) => { 
           form.resetFields();
-          mostrarFormulario(!formulario);
-          /* if(operacionseleccionada){
-            values = {...values, key: operacionseleccionada.key, fecha: operacionseleccionada.fecha , creador: operacionseleccionada.creador, _id: operacionseleccionada._id }
-            actualizarOperacion(values)
+          showFormulario(!formulario);
+          if(_currentPost){
+            values = {...values, id: _currentPost.id}
+            updatePost(values)
           }else{
-            values = {...values, key: uuidv4()}
-            agregarOperacion(values)
-          } */
+            createPost(values)
+          }
           })
           .catch((info) => {
             console.log('Validate Failed:', info);
@@ -84,7 +80,7 @@ forceRender
         name="form_in_modal"
         >
        <Form.Item
-          name="concepto"
+          name="title"
           label="Concepto"
           hasFeedback
           style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
@@ -97,7 +93,7 @@ forceRender
         >
           <Input />
         </Form.Item>
-        <Form.Item name="contenido" label="Contenido" hasFeedback rules={[
+        <Form.Item name="content" label="Contenido" hasFeedback rules={[
           {
             required: true,
             message: 'Seleccione un contenido',

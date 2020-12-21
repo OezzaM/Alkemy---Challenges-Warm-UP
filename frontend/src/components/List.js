@@ -6,18 +6,16 @@ import PostContext from '../context/postContext';
 const List = () => {
 
   const postContext = useContext(PostContext);
-  const { mostrarFormulario, obtenerPosts, posts } = postContext;
+  const { showFormulario, getPosts, posts, currentPost, deletePost } = postContext;
   
     useEffect(() => {
-      obtenerPosts();
-    }, [obtenerPosts]);
+      getPosts();
+    }, [getPosts]);
 
   function confirm(e) {
-    /* eliminarProyecto(e) */
-    message.success('Operacion eliminada');
+    deletePost(e)
+    message.success('Post eliminado');
   }
-
-
 
     const columns = [
         {
@@ -35,12 +33,12 @@ const List = () => {
                <Button 
                icon={<EditTwoTone />  } 
                onClick={() => {
-                /* guardarOperacionActual(text)
-                mostrarFormulario(true); */
+                currentPost(text)
+                showFormulario(true);
               }}
                />
                <Popconfirm
-                    title="¿Esta seguro que desea eliminar la operacion?"
+                    title="¿Esta seguro que desea eliminar el post?"
                     onConfirm={() => confirm(text._id)}
                     okText="Si"
                     cancelText="No"
@@ -59,8 +57,8 @@ const List = () => {
         type="primary"
         style={{border: 0, display: 'block', marginLeft: 'auto', margin:'10px 10px 0 auto'}}
         onClick={() => {
-          /* guardarOperacionActual(undefined) */
-          mostrarFormulario(true)
+          currentPost(undefined)
+          showFormulario(true)
         }}
       >
         Agregar un post
