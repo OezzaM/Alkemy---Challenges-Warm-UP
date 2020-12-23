@@ -3,7 +3,7 @@ module.exports = (sequelize, type) => {
         title: {
             type: type.STRING
         },
-        content: {
+        body: {
             type: type.STRING
         },
         image: {

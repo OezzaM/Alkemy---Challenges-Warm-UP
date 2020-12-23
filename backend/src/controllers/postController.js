@@ -19,11 +19,14 @@ exports.getPostId = (req, res) => {
         const id = req.params.id;
         Post.findOne({ where: {id}})
         .then(post => {
-            res.json(post)
+            if(post){
+                res.json(post)
+            }else{
+                res.status(404).send('Hubo un error');  
+            }
         })
     } catch (error) {
-        console.log(error);
-        res.status(400).send('Hubo un error');  
+        res.status(404).send('Hubo un error');  
     } 
     }
 
@@ -35,10 +38,10 @@ exports.createPost = (req, res) => {
             return res.status(400).json({errors: error.array()})
         }
         
-        const { title, content, image, category } = req.body
+        const { title, body, image, category } = req.body
         Post.create({
             title,
-            content,
+            body,
             image,
             category
         }). then (post => {
