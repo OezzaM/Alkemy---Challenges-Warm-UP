@@ -39,7 +39,7 @@ const List = () => {
                />
                <Popconfirm
                     title="¿Esta seguro que desea eliminar el post?"
-                    onConfirm={() => confirm(text._id)}
+                    onConfirm={() => confirm(text.id)}
                     okText="Si"
                     cancelText="No"
                     >

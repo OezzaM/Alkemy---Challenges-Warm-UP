@@ -27,7 +27,7 @@ const PostState = props => {
 
     const getPosts = async () => {
         try {
-            const resultado = await clienteAxios.get('https://jsonplaceholder.typicode.com/posts');
+            const resultado = await clienteAxios.get('/posts');
             
             dispatch({
                 type: GET_POSTS,
@@ -47,7 +47,7 @@ const PostState = props => {
 
     const createPost = async post => {
         try {
-            const resultado = await clienteAxios.post('https://jsonplaceholder.typicode.com/posts', post)
+            const resultado = await clienteAxios.post('/posts', post)
         
         dispatch({
             type: CREATE_POST,
@@ -60,7 +60,7 @@ const PostState = props => {
 
     const updatePost = async post => {
         try {
-            const resultado = await clienteAxios.put(`https://jsonplaceholder.typicode.com/posts/${post.id}`, post);
+            const resultado = await clienteAxios.put(`/posts/${post.id}`, post);
             
             dispatch({
                 type: UPDATE_POST,
@@ -73,7 +73,7 @@ const PostState = props => {
 
     const deletePost = async postId => {
         try {
-            await clienteAxios.delete(` https://jsonplaceholder.typicode.com/posts/${postId}`)
+            await clienteAxios.delete(`/posts/${postId}`)
             dispatch({
                 type: DELETE_POST,
                 payload: postId
@@ -85,7 +85,7 @@ const PostState = props => {
 
     const getPost = async postId => {
         try {
-            const resultado = await clienteAxios.get(` https://jsonplaceholder.typicode.com/posts/${postId}`);
+            const resultado = await clienteAxios.get(`/posts/${postId}`);
             dispatch({
                 type: GET_POST,
                 payload: resultado.data

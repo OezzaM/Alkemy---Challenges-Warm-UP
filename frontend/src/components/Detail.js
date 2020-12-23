@@ -8,7 +8,7 @@ import PostContext from '../context/postContext';
 const Detail = () => {
 
     const postContext = useContext(PostContext);
-  const { getPost, post, isNull } = postContext;
+    const { getPost, post, isNull } = postContext;
   
     const [form] = Form.useForm();
 

@@ -23,7 +23,7 @@ const Modals = () => {
       const { title, body } = _currentPost;
       form.setFieldsValue({
         title,
-        content: body
+        body
       });
     }else{
       form.resetFields();
@@ -93,7 +93,7 @@ forceRender
         >
           <Input />
         </Form.Item>
-        <Form.Item name="content" label="Contenido" hasFeedback rules={[
+        <Form.Item name="body" label="Contenido" hasFeedback rules={[
           {
             required: true,
             message: 'Seleccione un contenido',
